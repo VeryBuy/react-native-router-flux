@@ -83,3 +83,28 @@ export function popPrevious(state, routeName) {
   }
   return state;
 }
+
+// custom push
+const ROUTE_LIMIT = 5;
+export function customPush(state, routeName) {
+  const parent = getParent(state, routeName);
+  const { key, index } = parent;
+  const checkRouteName = item => item.routeName === routeName;
+  // find the index of the first item same with the routeName
+  const firstIdxWithRouteName = parent.routes.length > ROUTE_LIMIT ? parent.routes.findIndex(checkRouteName) : -1;
+
+  // it cause trim the routes if the followings are fullfilled:
+  // * firstIdxWithRouteName > -1
+  // * the difference between firstIdxWithRouteName and index > 5
+  //    means 6, 7, 8.... stacks will remove the first same route from the start
+  if (firstIdxWithRouteName > -1 && (index - firstIdxWithRouteName > ROUTE_LIMIT)) {
+    const routes = [
+      ...parent.routes.slice(0, firstIdxWithRouteName),
+      ...parent.routes.slice(firstIdxWithRouteName + 1),
+    ];
+    const newState = inject(state, key, index - 1, routes);
+
+    return newState;
+  }
+  return state;
+}
