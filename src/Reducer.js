@@ -1,7 +1,7 @@
 import isEqual from 'lodash';
 import { NavigationActions, StackActions } from 'react-navigation';
 import * as ActionConst from './ActionConst';
-import { getActiveState, popPrevious } from './State';
+import { getActiveState, popPrevious, customPush } from './State';
 
 export default function createReducer() {
   return (state, action) => {
@@ -35,6 +35,12 @@ export default function createReducer() {
         state,
       );
       const res = popPrevious(newState, routeName);
+      return res;
+    }
+    // handle custompush
+    if (type === 'Navigation/PUSH') {
+      const newState = navigationStore.getStateForAction(action, state);
+      const res = customPush(newState, routeName);
       return res;
     }
     return navigationStore.getStateForAction(action, state) || state;
