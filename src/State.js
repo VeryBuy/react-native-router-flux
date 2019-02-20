@@ -97,11 +97,8 @@ export function customPush(state, routeName) {
   // * firstIdxWithRouteName > -1
   // * the difference between firstIdxWithRouteName and index > 5
   //    means 6, 7, 8.... stacks will remove the first same route from the start
-  if (firstIdxWithRouteName > -1 && (index - firstIdxWithRouteName > ROUTE_LIMIT)) {
-    const routes = [
-      ...parent.routes.slice(0, firstIdxWithRouteName),
-      ...parent.routes.slice(firstIdxWithRouteName + 1),
-    ];
+  if (firstIdxWithRouteName > -1 && index - firstIdxWithRouteName > ROUTE_LIMIT) {
+    const routes = [...parent.routes.slice(0, firstIdxWithRouteName), ...parent.routes.slice(firstIdxWithRouteName + 1)];
     const newState = inject(state, key, index - 1, routes);
 
     return newState;
