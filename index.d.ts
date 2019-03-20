@@ -149,6 +149,7 @@ export var Actions: ActionsGenericStatic;
 export type Actions = ActionsGenericStatic;
 interface ActionsStatic {
   currentScene: any;
+  prevScene: any;
   jump: (sceneKey: string, props?: any) => void;
   pop: () => void;
   popAndPush: (sceneKey: string, props?: any) => void;
