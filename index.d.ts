@@ -142,6 +142,7 @@ interface StackProps extends React.Props<Stack> {
   hideTabBar?: boolean;
   title?: string;
   titleStyle?: StyleProp<TextStyle>;
+  headerLayoutPreset?: string;
 }
 interface StackStatic extends React.ComponentClass<StackProps> {}
 
