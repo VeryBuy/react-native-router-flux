@@ -91,7 +91,7 @@ export function customPush(state, routeName) {
   const { key, index } = parent;
   const checkRouteName = item => item.routeName === routeName;
   // find the index of the first item same with the routeName
-  const firstIdxWithRouteName = parent.routes.length > ROUTE_LIMIT ? parent.routes.findIndex(checkRouteName) : -1;
+  const firstIdxWithRouteName = parent.routes.length >= ROUTE_LIMIT ? parent.routes.findIndex(checkRouteName) : -1;
 
   // it cause trim the routes if the followings are fullfilled:
   // * firstIdxWithRouteName > -1
