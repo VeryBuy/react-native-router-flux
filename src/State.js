@@ -85,7 +85,7 @@ export function popPrevious(state, routeName) {
 }
 
 // custom push
-const ROUTE_LIMIT = 5;
+const ROUTE_LIMIT = 3;
 export function customPush(state, routeName) {
   const parent = getParent(state, routeName);
   const { key, index } = parent;
